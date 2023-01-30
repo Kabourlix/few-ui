@@ -1,0 +1,19 @@
+{
+  "name": "com.aurore.few-ui",
+  "version": "1.0.0",
+  "displayName": "Few UI",
+  "description": "Provide some UI Components.",
+  "unity": "2021.3",
+  "keywords": [
+    "components",
+    "UI"
+  ],
+  "author": {
+    "name": "Hugo Da Maia",
+    "email": "hdamaia@outlook.fr",
+    "url": "https://www.hdamaia.fr"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": ""
+  }
+}
