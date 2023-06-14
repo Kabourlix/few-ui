@@ -16,7 +16,6 @@ namespace Aurore.FewUI
         private LayoutElement _layoutElement;
 
         [SerializeField] private int characterWrapLimit;
-        [SerializeField] private Camera mainCam;
 
         [SerializeField] private bool lockTooltipOnSpawn = false;
         
@@ -36,7 +35,6 @@ namespace Aurore.FewUI
 
         private void Awake()
         {
-            mainCam ??= Camera.main;
             _rectTransform = GetComponent<RectTransform>();
             _layoutElement = GetComponent<LayoutElement>();
         }
@@ -56,7 +54,7 @@ namespace Aurore.FewUI
         public void SetPosition()
         {
             Vector3 mousePos = Mouse.current.position.ReadValue();
-            mousePos.z = mainCam.nearClipPlane;
+            mousePos.z = Camera.main.nearClipPlane;
 
             var pivotX = mousePos.x / Screen.width;
             var pivotY = mousePos.y / Screen.height;
