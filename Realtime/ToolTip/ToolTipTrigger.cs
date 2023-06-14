@@ -8,8 +8,8 @@ using UnityEngine.EventSystems;
 
 public class ToolTipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private string header;
-    [SerializeField][TextArea] private string content;
+    public string Header;
+    [TextArea] public string Content;
     
     [Range(0.2f,2f)]
     [Tooltip("Specify the delay time in seconds before the tooltip to be shown")]
@@ -25,7 +25,7 @@ public class ToolTipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private IEnumerator Display()
     {
         yield return _delayWait;
-        ToolTipSystem.Instance.Show(header, content);
+        ToolTipSystem.Instance.Show(Header, Content);
         _current = null;
     }
     
