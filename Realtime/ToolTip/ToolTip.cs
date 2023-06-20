@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Aurore.FewUI
 {
@@ -13,6 +14,7 @@ namespace Aurore.FewUI
     {
         [SerializeField] private TextMeshProUGUI headerField;
         [SerializeField] private TextMeshProUGUI contentField;
+        [SerializeField] private bool isTouch = false;
         private LayoutElement _layoutElement;
 
         [SerializeField] private int characterWrapLimit;
@@ -22,6 +24,7 @@ namespace Aurore.FewUI
         private RectTransform _rectTransform;
 
         #region Set texts
+        
 
         public void Set(string header, string content)
         {
@@ -53,14 +56,14 @@ namespace Aurore.FewUI
 
         public void SetPosition()
         {
-            Vector3 mousePos = Mouse.current.position.ReadValue();
-            mousePos.z = Camera.main.nearClipPlane;
+            var mousePos = isTouch ? Touch.activeTouches[0].screenPosition : Mouse.current.position.ReadValue();
+            //mousePos.z = Camera.main.nearClipPlane;
 
             var pivotX = mousePos.x / Screen.width;
             var pivotY = mousePos.y / Screen.height;
 
             _rectTransform.pivot = new Vector2(pivotX, pivotY);
-            transform.position = mousePos;
+            transform.position = (Vector3)mousePos + Camera.main.nearClipPlane * Vector3.forward;
 
         }
 
