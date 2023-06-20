@@ -19,9 +19,11 @@ namespace Aurore.FewUI
         [Tooltip("Animation length of tooltip apparition")]
         [Range(0.01f,0.5f)]
         [SerializeField] private float animTime = 0.2f;
+        
+        
         private void Awake()
         {
-            if(Instance is not null && Instance != this) Destroy(gameObject);
+            if(Instance != null && Instance != this) Destroy(gameObject);
             Instance = this;
             
             _tooltip = GetComponentInChildren<ToolTip>();
@@ -35,6 +37,12 @@ namespace Aurore.FewUI
         
 
         private Coroutine _showCoroutine;
+        
+        /// <summary>
+        /// Show the tooltip with the given header and content.
+        /// </summary>
+        /// <param name="header">The title.</param>
+        /// <param name="content">Pretty obvious what it is.</param>
         public void Show(string header, string content)
         {
             _tooltip.Set(header, content);
@@ -42,6 +50,11 @@ namespace Aurore.FewUI
             //ShowToolTip(true);
         }
 
+        /// <summary>
+        /// Coroutine to smoothly show the content of the tooltip.
+        /// Animations values are set in the inspector.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator ShowSmooth()
         {
             _tooltip.SetPosition();
@@ -54,9 +67,12 @@ namespace Aurore.FewUI
             }
 
             _showCoroutine = null;
-            
         }
 
+        /// <summary>
+        /// Coroutine to hide the tooltip smoothly.
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator HideSmooth()
         {
             var time = animTime;
@@ -68,6 +84,9 @@ namespace Aurore.FewUI
             }
         }
 
+        /// <summary>
+        /// Method to hide the tooltip. (It calls HideSmooth via coroutine)
+        /// </summary>
         public void Hide()
         {
             if(_showCoroutine is not null) StopCoroutine(_showCoroutine);

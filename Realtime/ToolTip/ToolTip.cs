@@ -59,7 +59,7 @@ namespace Aurore.FewUI
             var pivotX = mousePos.x / Screen.width;
             var pivotY = mousePos.y / Screen.height;
 
-            _rectTransform.pivot = pivotX * Vector2.right + pivotY * Vector2.up;
+            _rectTransform.pivot = new Vector2(pivotX, pivotY);
             transform.position = mousePos;
 
         }
