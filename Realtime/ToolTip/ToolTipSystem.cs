@@ -92,5 +92,10 @@ namespace Aurore.FewUI
             if(_showCoroutine is not null) StopCoroutine(_showCoroutine);
             StartCoroutine(HideSmooth());
         }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 }
