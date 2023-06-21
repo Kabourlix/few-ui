@@ -56,6 +56,7 @@ namespace Aurore.FewUI
 
         public void SetPosition()
         {
+            if(Touch.activeTouches.Count == 0 && !Mouse.current.leftButton.isPressed) return;
             var mousePos = isTouch ? Touch.activeTouches[0].screenPosition : Mouse.current.position.ReadValue();
             //mousePos.z = Camera.main.nearClipPlane;
 
