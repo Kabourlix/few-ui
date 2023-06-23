@@ -20,7 +20,15 @@ namespace Aurore.FewUI
         [SerializeField] private int characterWrapLimit;
 
         [SerializeField] private bool lockTooltipOnSpawn = false;
+
+        [Header("Offset")]
+        [Range(0, 1)]
+        [SerializeField] private float yOffsetPercentage = 0.1f;
         
+        [Range(0, 1)]
+        [SerializeField] private float xOffsetPercentage = 0.2f;
+        
+
         private RectTransform _rectTransform;
 
         #region Set texts
@@ -62,8 +70,11 @@ namespace Aurore.FewUI
             
             var pivotX = mousePos.x / Screen.width;
             var pivotY = mousePos.y / Screen.height;
-            mousePos.x += pivotX > 0.7f ? -40 : 40;
-            mousePos.y += pivotY > 0.7f ? -60 : 60;
+
+            var moveY = yOffsetPercentage * Screen.height;
+            var moveX = xOffsetPercentage * Screen.width;
+            mousePos.x += pivotX > 0.7f ? -moveX : moveX;
+            mousePos.y += pivotY > 0.7f ? -moveY : moveY;
             _rectTransform.pivot = new Vector2(pivotX, pivotY);
             transform.position = (Vector3)mousePos + Camera.main.nearClipPlane * Vector3.forward;
 
